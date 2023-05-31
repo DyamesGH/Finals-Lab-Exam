@@ -28,6 +28,10 @@ public class Item {
 	public int getStock() {
 		return stock;
 	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public void setStock(int stock) {
 		this.stock = stock;

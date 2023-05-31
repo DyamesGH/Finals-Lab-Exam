@@ -4,8 +4,6 @@ public class ItemNode {
 	private ItemNode previous;
 	private Item data;
 	
-	
-	
 	public ItemNode(Item data) {
 		this.data = data;
 		next = null;
