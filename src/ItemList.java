@@ -41,10 +41,10 @@ public class ItemList {
 		return "";
 	}
 	
-	public Item getItem(int id) {
+	public  Item getItem(int id) {
 		ItemNode currentNode = head;
 		
-		while(currentNode.getData().getId() != id && currentNode.getNext()!=null) {
+		while(currentNode != null) {
 			if(currentNode.getData().getId() == id) {
 				return currentNode.getData();
 			}else {
