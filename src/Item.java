@@ -5,9 +5,9 @@ public class Item {
 	private String description;
 	private int price;
 	private int stock;
-	
-	public Item (int id, String desc, int price, int stock){
-		this.id= id;
+
+	public Item(int id, String desc, int price, int stock) {
+		this.id = id;
 		this.description = desc;
 		this.price = price;
 		this.stock = stock;
@@ -28,16 +28,13 @@ public class Item {
 	public int getStock() {
 		return stock;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
 
 	public void setStock(int stock) {
 		this.stock = stock;
-	}	
-	
-	
-	
-	
+	}
+
 }
