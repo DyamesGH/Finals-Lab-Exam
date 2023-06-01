@@ -87,11 +87,11 @@ public class Main {
 		orderList = new OrderList();
 		double orderSubTotal = 0.00;
 		double transactionTotal = 0.00;
-		itemList.displayItems();
-
-		System.out.println("\nTransaction ID: " + transactionList.getTransactionID());
 
 		while (cont) {
+			System.out.println();
+			itemList.displayItems();
+			System.out.println("\nTransaction ID: " + transactionList.getTransactionID());
 			System.out.print("\nEnter Item ID: ");
 			int id = Integer.parseInt(reader.readLine());
 
