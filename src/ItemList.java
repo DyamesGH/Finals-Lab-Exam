@@ -35,7 +35,7 @@ public class ItemList {
 		System.out.printf("%-25s %-25s %-25s %-25s %n", "Item ID", "Description", "Price", "Stock");
 		ItemNode currentNode = head;
 		while (currentNode != null) {
-			System.out.printf("%-25d %-25s %-25d  %-25d %n", currentNode.getData().getId(),
+			System.out.printf("%-25d %-25s %-,25.2f %,-25d %n", currentNode.getData().getId(),
 					currentNode.getData().getDescription(), currentNode.getData().getPrice(),
 					currentNode.getData().getStock());
 			currentNode = currentNode.getNext();

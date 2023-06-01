@@ -3,7 +3,7 @@ public class Item {
 
 	private int id;
 	private String description;
-	private int price;
+	private double price;
 	private int stock;
 
 	public Item(int id, String desc, int price, int stock) {
@@ -21,7 +21,7 @@ public class Item {
 		return description;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 

@@ -62,6 +62,7 @@ public class Main {
 	}
 
 	public static void replenishStock() throws NumberFormatException, IOException {
+		itemList.displayItems();
 		System.out.print("Select an item by entering its ID: ");
 		int ID = Integer.parseInt(reader.readLine());
 		Item item = itemList.getItem(ID);
@@ -78,10 +79,10 @@ public class Main {
 
 	public static void transactOrder() throws NumberFormatException, IOException {
 		boolean cont = true;
-		TransactionNode newTransaction = new TransactionNode();
+		Transaction newTransaction = new Transaction();
 		orderList = new OrderList();
-		int orderSubTotal = 0;
-		int transactionTotal = 0;
+		double orderSubTotal = 0.00;
+		double transactionTotal = 0.00;
 		itemList.displayItems();
 
 		System.out.println("\nTransaction ID: " + transactionList.getTransactionID());
@@ -111,7 +112,7 @@ public class Main {
 			}
 
 			orderSubTotal = itemList.getItem(id).getPrice() * quantity;
-			System.out.println("Subtotal: P " + orderSubTotal);
+			System.out.printf("Subtotal: P %,.2f %n" , orderSubTotal);
 			transactionTotal += orderSubTotal;
 			orderList.addOrder(id, quantity, orderSubTotal);
 
@@ -122,7 +123,7 @@ public class Main {
 			cont = choice == 'n' ? false : true;
 		}
 
-		System.out.println("\nTotal Price: " + transactionTotal);
+		System.out.printf("%nTotal Price: P %,.2f %n" , transactionTotal);
 		System.out.println("Transaction recorded!");
 
 		newTransaction.setOrderList(orderList);
@@ -132,18 +133,19 @@ public class Main {
 	}
 
 	public static void generateReport() {
-		TransactionNode temp = transactionList.getHead();
+		Transaction transaction = transactionList.getHead();
 		double totalSales = 0;
 
-		while (temp != null) {
-			System.out.println("Transaction ID: " + temp.getTransactionID());
-			temp.getOrderList().displayOrders(itemList);
-			System.out.println("Total:\t\t\t\t\tP" + temp.getTotalPrice() + "\n");
-			totalSales += temp.getTotalPrice();
-			temp = temp.getNext();
+		while (transaction != null) {
+			System.out.println("Transaction ID: " + transaction.getTransactionID());
+			transaction.getOrderList().displayOrders(itemList);
+			System.out.printf("%nTotal: P %,.2f %n",transaction.getTotalPrice());
+			totalSales += transaction.getTotalPrice();
+			transaction = transaction.getNext();
 		}
-
-		System.out.println("Total Sales: P " + totalSales);
+		
+		System.out.printf("Total Sales: P %,.2f",totalSales);
+//		System.out.println("Total Sales: P " + totalSales);
 
 	}
 

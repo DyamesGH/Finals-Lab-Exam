@@ -7,9 +7,10 @@ public class OrderNode {
 	private OrderNode previous;
 
 	OrderNode() {
+		
 	}
 
-	OrderNode(int itemID, int quantity, int price) {
+	OrderNode(int itemID, int quantity, double price) {
 		this.itemID = itemID;
 		this.quantity = quantity;
 		this.price = price;

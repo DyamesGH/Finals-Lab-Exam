@@ -1,22 +1,22 @@
 
 public class TransactionList {
 	private int transactionID = 1;
-	private TransactionNode head;
-	private TransactionNode tail;
+	private Transaction head;
+	private Transaction tail;
 
-	public TransactionNode getHead() {
+	public Transaction getHead() {
 		return head;
 	}
 
-	public void setHead(TransactionNode head) {
+	public void setHead(Transaction head) {
 		this.head = head;
 	}
 
-	public TransactionNode getTail() {
+	public Transaction getTail() {
 		return tail;
 	}
 
-	public void setTail(TransactionNode tail) {
+	public void setTail(Transaction tail) {
 		this.tail = tail;
 	}
 
@@ -24,7 +24,7 @@ public class TransactionList {
 		return transactionID;
 	}
 
-	public void addTransaction(TransactionNode newTransaction) {
+	public void addTransaction(Transaction newTransaction) {
 		newTransaction.setTransactionID(transactionID);
 
 		if (head == null) {

@@ -19,7 +19,7 @@ public class OrderList {
 		this.tail = tail;
 	}
 
-	public void addOrder(int itemID, int quantity, int price) {
+	public void addOrder(int itemID, int quantity, double price) {
 		OrderNode newOrder = new OrderNode(itemID, quantity, price);
 
 		if (head == null) {
@@ -36,9 +36,12 @@ public class OrderList {
 		OrderNode temp = head;
 
 		while (temp != null) {
-			System.out.println(itemList.getItem(temp.getItemID()).getDescription() + "\t\t"
-					+ (itemList.getItem(temp.getItemID()).getPrice()) + " x " + temp.getQuantity() + "\t\tP"
-					+ temp.getPrice());
+			
+			System.out.printf("%-20s%,10.2f  x  %,-20dP%,.2f %n",itemList.getItem(temp.getItemID()).getDescription(),itemList.getItem(temp.getItemID()).getPrice()
+					,temp.getQuantity(),temp.getPrice());
+//			System.out.println(itemList.getItem(temp.getItemID()).getDescription() + "\t\t"
+//					+ (itemList.getItem(temp.getItemID()).getPrice()) + " x " + temp.getQuantity() + "\t\tP"
+//					+ temp.getPrice());
 			temp = temp.getNext();
 		}
 	}
