@@ -34,7 +34,7 @@ public class ItemList {
 		}
 	}
 
-	public String displayItems() {
+	public void displayItems() {
 		System.out.printf("%-25s %-25s %-25s %-25s %n", "Item ID", "Description", "Price", "Stock");
 		ItemNode currentNode = head;
 		while (currentNode != null) {
@@ -43,7 +43,6 @@ public class ItemList {
 					currentNode.getData().getStock());
 			currentNode = currentNode.getNext();
 		}
-		return "";
 	}
 
 	public Item getItem(int id) {
