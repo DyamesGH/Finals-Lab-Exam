@@ -63,16 +63,20 @@ public class Main {
 
 	public static void replenishStock() throws NumberFormatException, IOException {
 		itemList.displayItems();
-		System.out.print("Select an item by entering its ID: ");
-		int ID = Integer.parseInt(reader.readLine());
-		Item item = itemList.getItem(ID);
-		if (item == null) {
-			System.out.println("Item is not found!");
-		} else {
-			System.out.print("Number of stocks to be added: ");
-			int addedStocks = Integer.parseInt(reader.readLine());
-			item.setStock(item.getStock() + addedStocks);
-			System.out.println("\nUpdate Successfull!");
+		if(itemList.getHead() == null) {
+			System.out.println("There are no items in the inventory.");
+		}else {
+			System.out.print("Select an item by entering its ID: ");
+			int ID = Integer.parseInt(reader.readLine());
+			Item item = itemList.getItem(ID);
+			if (item == null) {
+				System.out.println("Item is not found!");
+			} else {
+				System.out.print("Number of stocks to be added: ");
+				int addedStocks = Integer.parseInt(reader.readLine());
+				item.setStock(item.getStock() + addedStocks);
+				System.out.println("\nUpdate Successfull!");
+			}
 		}
 
 	}

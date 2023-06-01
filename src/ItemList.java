@@ -14,6 +14,9 @@ public class ItemList {
 	public static int getItemIdCounter() {
 		return itemIdCounter;
 	}
+	public ItemNode getHead() {
+		return head;
+	}
 
 	public void add(ItemNode node) {
 		if (head == null) {
