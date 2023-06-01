@@ -1,4 +1,6 @@
-
+/*
+ * Acts as the *inventory* of the items.
+ */
 public class ItemList {
 
 	private ItemNode head;
@@ -18,6 +20,7 @@ public class ItemList {
 		return head;
 	}
 
+	//Adds an ItemNode in the list
 	public void add(ItemNode node) {
 		if (head == null) {
 
@@ -34,6 +37,9 @@ public class ItemList {
 		}
 	}
 
+	/*
+	 * Displays the items in the list in a specific format
+	 */
 	public void displayItems() {
 		System.out.printf("%-25s %-25s %-25s %-25s %n", "Item ID", "Description", "Price", "Stock");
 		ItemNode currentNode = head;
@@ -45,6 +51,10 @@ public class ItemList {
 		}
 	}
 
+	/*
+	 * Used to search for an item in the list.
+	 * Returns the item if it is found, returns null if it not found.
+	 */
 	public Item getItem(int id) {
 		ItemNode currentNode = head;
 

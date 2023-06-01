@@ -1,4 +1,8 @@
-
+/*
+ * This class is the transactions that the users have undergone.
+ * It contains a list of orders that the users made, its own id, and the total price
+ * of the ordered items.
+ */
 public class Transaction {
 	private int transactionID;
 	private double totalPrice;
@@ -6,6 +10,7 @@ public class Transaction {
 	private Transaction next;
 	private Transaction previous;
 
+	//setters and getters
 	public int getTransactionID() {
 		return transactionID;
 	}

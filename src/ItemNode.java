@@ -1,15 +1,19 @@
-
+/*
+ * Acts as a carrier for the items.
+ * Used by the ItemsList to manipulate the items.
+ */
 public class ItemNode {
 	private ItemNode next;
 	private ItemNode previous;
 	private Item data;
 
+	//Constructor
 	public ItemNode(Item data) {
 		this.data = data;
 		next = null;
 		previous = null;
 	}
-
+	//Setters and getters
 	public ItemNode getNext() {
 		return next;
 	}

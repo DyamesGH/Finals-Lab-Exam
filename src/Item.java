@@ -1,4 +1,7 @@
 
+/*
+ * This class acts as the items Themselves.
+ */
 public class Item {
 
 	private int id;
@@ -6,6 +9,7 @@ public class Item {
 	private double price;
 	private int stock;
 
+	//Constructor
 	public Item(int id, String desc, int price, int stock) {
 		this.id = id;
 		this.description = desc;
@@ -13,6 +17,7 @@ public class Item {
 		this.stock = stock;
 	}
 
+	//Setters getters
 	public int getId() {
 		return id;
 	}

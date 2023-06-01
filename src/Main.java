@@ -13,6 +13,12 @@ public class Main {
 	public static void main(String[] args) throws NumberFormatException, InterruptedException, IOException {
 		while (true) {
 
+			/*
+			 * Main menu of the program.
+			 * Each functions in the switch cases are placed on their own
+			 * methods to increase readability.
+			 * Each cases corresponds to a function call to do the operations.
+			 */
 			System.out.println("\n[1] Display Items");
 			System.out.println("[2] Add New Item");
 			System.out.println("[3] Replenish Stock");
@@ -48,6 +54,10 @@ public class Main {
 
 	}
 
+	/*
+	 * Adds an item into the inventory.
+	 * Asks the user for item description, price, and initial stock count.
+	 */
 	public static void addItem() throws IOException {
 		System.out.print("\nEnter the description of the new item: ");
 		String description = reader.readLine();
@@ -61,6 +71,13 @@ public class Main {
 
 	}
 
+	/*
+	 * Replenishes stock of the selected item.
+	 * Operation cannot be done if there are no items yet in the inventory.
+	 * Ask the user for the item's ID, if the item does not exist the operation will be cancelled.
+	 * If it is found, the user will be asked to input a stock value.
+	 * A positive number to increase the stock, and a negative value to decrease the stock.
+	 */
 	public static void replenishStock() throws NumberFormatException, IOException {
 		itemList.displayItems();
 		if(itemList.getHead() == null) {
@@ -81,6 +98,18 @@ public class Main {
 
 	}
 
+	/*
+	 * The method for performing a transacting operation.
+	 * The item is first searched if it exists or if the item has any stocks left.
+	 * The item cannot be under transaction if it does not exist or if it does not have any stocks left.
+	 * 
+	 
+	 * The user will be prompted on how many will they order. 
+	 * After every transaction the sub total will be shown and 
+	 * they will be asked if they want to do another transaction.
+	 * 
+	 * When the user refused to do any more transactions, the total of the transaction will be displayed.
+	 */
 	public static void transactOrder() throws NumberFormatException, IOException {
 		boolean cont = true;
 		Transaction newTransaction = new Transaction();
@@ -136,6 +165,17 @@ public class Main {
 		transactionList.addTransaction(newTransaction);
 	}
 
+	/*
+	 * Generates reports of the past transactions.
+	 * A prompt will be shown if there are no transaction that occurred yet.
+	 * The report shows all of the transactions that occurred sorted by their ID.
+	 * Each report consists of all details of the transactions that occurred.
+	 * Per transactions, it shows the product description, its price multiplied 
+	 * by the quantity ordered, the sub total of the product ordered,
+	 * and the total of the transaction.
+	 * At the bottom, the total sales is displayed amounting to the total of all 
+	 * the transactions that have occurred.
+	 */
 	public static void generateReport() {
 		if(transactionList.getHead() == null) {
 			System.out.println("There are no transactions yet.");
@@ -152,7 +192,6 @@ public class Main {
 			}
 			
 			System.out.printf("Total Sales: P %,.2f",totalSales);
-//		System.out.println("Total Sales: P " + totalSales);
 		}
 
 	}

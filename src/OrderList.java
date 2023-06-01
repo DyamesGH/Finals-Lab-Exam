@@ -1,4 +1,6 @@
-
+/*
+ * This class is a list used to store the items that the users have ordered.
+ */
 public class OrderList {
 	private OrderNode head;
 	private OrderNode tail;
@@ -19,6 +21,9 @@ public class OrderList {
 		this.tail = tail;
 	}
 
+	/*
+	 * Adds an order in the order in the order list.
+	 */
 	public void addOrder(int itemID, int quantity, double price) {
 		OrderNode newOrder = new OrderNode(itemID, quantity, price);
 
@@ -32,6 +37,7 @@ public class OrderList {
 		}
 	}
 
+	//Displays all of the orders.
 	public void displayOrders(ItemList itemList) {
 		OrderNode temp = head;
 
@@ -39,13 +45,11 @@ public class OrderList {
 			
 			System.out.printf("%-20s%,10.2f  x  %,-20dP%,.2f %n",itemList.getItem(temp.getItemID()).getDescription(),itemList.getItem(temp.getItemID()).getPrice()
 					,temp.getQuantity(),temp.getPrice());
-//			System.out.println(itemList.getItem(temp.getItemID()).getDescription() + "\t\t"
-//					+ (itemList.getItem(temp.getItemID()).getPrice()) + " x " + temp.getQuantity() + "\t\tP"
-//					+ temp.getPrice());
 			temp = temp.getNext();
 		}
 	}
 
+	//Checks if an order exists.
 	public boolean orderExist(int id) {
 		OrderNode temp = head;
 

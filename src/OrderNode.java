@@ -1,4 +1,9 @@
 
+/*
+ * This class acts as an object that stores the informations of the user's order.
+ * It contains the ordered item's id, how many of those items are ordered, and the total price of the order.
+ * 
+ */
 public class OrderNode {
 	private int itemID;
 	private int quantity;
@@ -6,6 +11,7 @@ public class OrderNode {
 	private OrderNode next;
 	private OrderNode previous;
 
+	//Constructors
 	OrderNode() {
 		
 	}
@@ -18,6 +24,7 @@ public class OrderNode {
 		previous = null;
 	}
 
+	//setters and getters
 	public int getItemID() {
 		return itemID;
 	}

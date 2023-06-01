@@ -1,4 +1,6 @@
-
+/*
+ * This class is used to store the transactions that have occured.
+ */
 public class TransactionList {
 	private int transactionID = 1;
 	private Transaction head;
@@ -24,6 +26,7 @@ public class TransactionList {
 		return transactionID;
 	}
 
+	//Adds a transactions in the list
 	public void addTransaction(Transaction newTransaction) {
 		newTransaction.setTransactionID(transactionID);
 
