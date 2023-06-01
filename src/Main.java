@@ -104,7 +104,7 @@ public class Main {
 			System.out.print("How many " + itemList.getItem(id).getDescription() + "? ");
 			int quantity = Integer.parseInt(reader.readLine());
 			if (itemList.getItem(id).getStock() < quantity) {
-				System.out.println("Not . Please try again.");
+				System.out.println("Not enought stocks. Please try again.");
 				continue;
 			} else {
 				itemList.getItem(id).setStock(itemList.getItem(id).getStock() - quantity);
