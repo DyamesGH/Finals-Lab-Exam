@@ -137,19 +137,23 @@ public class Main {
 	}
 
 	public static void generateReport() {
-		Transaction transaction = transactionList.getHead();
-		double totalSales = 0;
-
-		while (transaction != null) {
-			System.out.println("Transaction ID: " + transaction.getTransactionID());
-			transaction.getOrderList().displayOrders(itemList);
-			System.out.printf("%nTotal: P %,.2f %n",transaction.getTotalPrice());
-			totalSales += transaction.getTotalPrice();
-			transaction = transaction.getNext();
-		}
-		
-		System.out.printf("Total Sales: P %,.2f",totalSales);
+		if(transactionList.getHead() == null) {
+			System.out.println("There are no transactions yet.");
+		}else {
+			Transaction transaction = transactionList.getHead();
+			double totalSales = 0;
+			
+			while (transaction != null) {
+				System.out.println("Transaction ID: " + transaction.getTransactionID());
+				transaction.getOrderList().displayOrders(itemList);
+				System.out.printf("%nTotal: P %,.2f %n",transaction.getTotalPrice());
+				totalSales += transaction.getTotalPrice();
+				transaction = transaction.getNext();
+			}
+			
+			System.out.printf("Total Sales: P %,.2f",totalSales);
 //		System.out.println("Total Sales: P " + totalSales);
+		}
 
 	}
 
