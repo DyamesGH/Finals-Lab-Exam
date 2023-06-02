@@ -18,11 +18,14 @@ public class Main {
 				 * their own methods to increase readability. Each cases corresponds to a
 				 * function call to do the operations.
 				 */
-				System.out.println("\n[1] Display Items");
+				System.out.println("\n-----Inventory-----");
+				System.out.println("[1] Display Items");
 				System.out.println("[2] Add New Item");
 				System.out.println("[3] Replenish Stock");
+				System.out.println("-------Sales-------");
 				System.out.println("[4] Transact Order");
 				System.out.println("[5] Generate Report");
+				System.out.println("-------Exit--------");
 				System.out.println("[6] Exit");
 
 				System.out.print("Enter command: ");
