@@ -14,10 +14,9 @@ public class Main {
 		while (true) {
 			try {
 				/*
-				 * Main menu of the program.
-				 * Each functions in the switch cases are placed on their own
-				 * methods to increase readability.
-				 * Each cases corresponds to a function call to do the operations.
+				 * Main menu of the program. Each functions in the switch cases are placed on
+				 * their own methods to increase readability. Each cases corresponds to a
+				 * function call to do the operations.
 				 */
 				System.out.println("\n[1] Display Items");
 				System.out.println("[2] Add New Item");
@@ -25,10 +24,10 @@ public class Main {
 				System.out.println("[4] Transact Order");
 				System.out.println("[5] Generate Report");
 				System.out.println("[6] Exit");
-				
+
 				System.out.print("Enter command: ");
 				int command = Integer.parseInt(reader.readLine());
-				
+
 				switch (command) {
 				case 1:
 					itemList.displayItems();
@@ -50,9 +49,9 @@ public class Main {
 				default:
 					System.out.println("Invalid input.");
 					break;
-					
+
 				}
-				
+
 			} catch (NumberFormatException e) {
 				System.out.println("Invalid input.");
 			}
@@ -62,8 +61,8 @@ public class Main {
 	}
 
 	/*
-	 * Adds an item into the inventory.
-	 * Asks the user for item description, price, and initial stock count.
+	 * Adds an item into the inventory. Asks the user for item description, price,
+	 * and initial stock count.
 	 */
 	public static void addItem() throws IOException {
 		try {
@@ -83,18 +82,22 @@ public class Main {
 	}
 
 	/*
-	 * Replenishes stock of the selected item.
-	 * Operation cannot be done if there are no items yet in the inventory.
-	 * Ask the user for the item's ID, if the item does not exist the operation will be cancelled.
-	 * If it is found, the user will be asked to input a stock value.
-	 * A positive number to increase the stock, and a negative value to decrease the stock.
+	 * Replenishes stock of the selected item. Operation cannot be done if there are
+	 * no items yet in the inventory. Ask the user for the item's ID, if the item
+	 * does not exist the operation will be cancelled. If it is found, the user will
+	 * be asked to input a stock value. A positive number to increase the stock, and
+	 * a negative value to decrease the stock.
 	 */
 	public static void replenishStock() throws NumberFormatException, IOException {
+		if (!itemList.haveItem()) {
+			return;
+		}
+
 		try {
 			itemList.displayItems();
-			if(itemList.getHead() == null) {
+			if (itemList.getHead() == null) {
 				System.out.println("There are no items in the inventory.");
-			}else {
+			} else {
 				System.out.print("Select an item by entering its ID: ");
 				int ID = Integer.parseInt(reader.readLine());
 				Item item = itemList.getItem(ID);
@@ -114,34 +117,41 @@ public class Main {
 	}
 
 	/*
-	 * The method for performing a transacting operation.
-	 * The item is first searched if it exists or if the item has any stocks left.
-	 * The item cannot be under transaction if it does not exist or if it does not have any stocks left.
+	 * The method for performing a transacting operation. The item is first searched
+	 * if it exists or if the item has any stocks left. The item cannot be under
+	 * transaction if it does not exist or if it does not have any stocks left.
 	 * 
-	 
-	 * The user will be prompted on how many will they order. 
-	 * After every transaction the sub total will be shown and 
-	 * they will be asked if they want to do another transaction.
 	 * 
-	 * When the user refused to do any more transactions, the total of the transaction will be displayed.
-	 * When the user has already ordered all of the items in the inventory, they won't be able to order anymore
-	 * and their orders will be totaled.
+	 * The user will be prompted on how many will they order. After every
+	 * transaction the sub total will be shown and they will be asked if they want
+	 * to do another transaction.
+	 * 
+	 * When the user refused to do any more transactions, the total of the
+	 * transaction will be displayed. When the user has already ordered all of the
+	 * items in the inventory, they won't be able to order anymore and their orders
+	 * will be totaled.
 	 */
 	public static void transactOrder() throws NumberFormatException, IOException {
+		if (!itemList.haveItem()) {
+			return;
+		} else if (!itemList.haveStocks()) {
+			return;
+		}
+
 		try {
 			boolean cont = true;
 			Transaction newTransaction = new Transaction();
 			orderList = new OrderList();
 			double orderSubTotal = 0.00;
 			double transactionTotal = 0.00;
-			
+
 			while (cont) {
 				System.out.println();
 				itemList.displayItems();
 				System.out.println("\nTransaction ID: " + transactionList.getTransactionID());
 				System.out.print("\nEnter Item ID: ");
 				int id = Integer.parseInt(reader.readLine());
-				
+
 				if (orderList.orderExist(id) == true) {
 					System.out.println("The item is already in the list. Select another item.");
 					continue;
@@ -152,7 +162,7 @@ public class Main {
 					System.out.println("Item is out of stock. Please try again.");
 					continue;
 				}
-				
+
 				System.out.print("How many " + itemList.getItem(id).getDescription() + "? ");
 				int quantity = Integer.parseInt(reader.readLine());
 				if (itemList.getItem(id).getStock() < quantity) {
@@ -161,28 +171,32 @@ public class Main {
 				} else {
 					itemList.getItem(id).setStock(itemList.getItem(id).getStock() - quantity);
 				}
-				
+
 				orderSubTotal = itemList.getItem(id).getPrice() * quantity;
-				System.out.printf("Subtotal: P %,.2f %n" , orderSubTotal);
+				System.out.printf("Subtotal: P %,.2f %n", orderSubTotal);
 				transactionTotal += orderSubTotal;
 				orderList.addOrder(id, quantity, orderSubTotal);
-				
+
 				orderSubTotal = 0;
-				if(orderList.getSize() != itemList.getSize()) {
+				if (orderList.getSize() != itemList.getSize()) {
 					System.out.print("Do you wish to add another item y/n? ");
 					char choice = reader.readLine().charAt(0);
 					cont = choice == 'n' ? false : true;
-				}else {
+				} else {
 					cont = false;
 				}
+
+				if (!itemList.haveStocks()) {
+					break;
+				}
 			}
-			
-			System.out.printf("%nTotal Price: P %,.2f %n" , transactionTotal);
+
+			System.out.printf("%nTotal Price: P %,.2f %n", transactionTotal);
 			System.out.println("Transaction recorded!");
-			
+
 			newTransaction.setOrderList(orderList);
 			newTransaction.setTotalPrice(transactionTotal);
-			
+
 			transactionList.addTransaction(newTransaction);
 		} catch (Exception e) {
 			System.out.println("Invalid input.");
@@ -190,32 +204,31 @@ public class Main {
 	}
 
 	/*
-	 * Generates reports of the past transactions.
-	 * A prompt will be shown if there are no transaction that occurred yet.
-	 * The report shows all of the transactions that occurred sorted by their ID.
-	 * Each report consists of all details of the transactions that occurred.
-	 * Per transactions, it shows the product description, its price multiplied 
-	 * by the quantity ordered, the sub total of the product ordered,
-	 * and the total of the transaction.
-	 * At the bottom, the total sales is displayed amounting to the total of all 
-	 * the transactions that have occurred.
+	 * Generates reports of the past transactions. A prompt will be shown if there
+	 * are no transaction that occurred yet. The report shows all of the
+	 * transactions that occurred sorted by their ID. Each report consists of all
+	 * details of the transactions that occurred. Per transactions, it shows the
+	 * product description, its price multiplied by the quantity ordered, the sub
+	 * total of the product ordered, and the total of the transaction. At the
+	 * bottom, the total sales is displayed amounting to the total of all the
+	 * transactions that have occurred.
 	 */
 	public static void generateReport() {
-		if(transactionList.getHead() == null) {
+		if (transactionList.getHead() == null) {
 			System.out.println("There are no transactions yet.");
-		}else {
+		} else {
 			Transaction transaction = transactionList.getHead();
 			double totalSales = 0;
-			
+
 			while (transaction != null) {
 				System.out.println("Transaction ID: " + transaction.getTransactionID());
 				transaction.getOrderList().displayOrders(itemList);
-				System.out.printf("%nTotal: P %,.2f %n",transaction.getTotalPrice());
+				System.out.printf("%nTotal: P %,.2f %n", transaction.getTotalPrice());
 				totalSales += transaction.getTotalPrice();
 				transaction = transaction.getNext();
 			}
-			
-			System.out.printf("Total Sales: P %,.2f",totalSales);
+
+			System.out.printf("Total Sales: P %,.2f", totalSales);
 		}
 
 	}
