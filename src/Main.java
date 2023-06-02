@@ -141,7 +141,7 @@ public class Main {
 	public static void transactOrder() throws NumberFormatException, IOException {
 		if (!itemList.haveItem()) {
 			return;
-		} else if (!itemList.checkItemsStocks()) {
+		} else if (!itemList.ifItemsHaveStocks()) {
 			return;
 		}
 
@@ -189,15 +189,15 @@ public class Main {
 				if (orderList.getSize() != itemList.getSize()) {
 					System.out.print("Do you wish to add another item y/n? ");
 					char choice = reader.readLine().charAt(0);
-					cont = choice == 'n' ? false : true;
+					if(choice == 'n') {
+						cont = false;
+					}else {
+						cont = true;
+						continue;
+					}
 				} else {
 					cont = false;
 				}
-
-				if (!itemList.checkItemsStocks()) {
-					break;
-				}
-				
 				System.out.printf("%nTotal Price: P %,.2f %n", transactionTotal);
 				System.out.println("Transaction recorded!");
 				
@@ -205,6 +205,9 @@ public class Main {
 				newTransaction.setTotalPrice(transactionTotal);
 				
 				transactionList.addTransaction(newTransaction);
+				if (itemList.ifItemsHaveStocks() == false) {
+					break;
+				}
 
 			} catch (Exception e) {
 				System.out.println("Invalid input.");
