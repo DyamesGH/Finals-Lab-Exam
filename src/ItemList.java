@@ -98,7 +98,7 @@ public class ItemList {
 	 * still have stock it automatically returns true then if the whole list is
 	 * traversed but all the items have no stocks then it returns.
 	 */
-	public boolean haveStocks() {
+	public boolean checkItemsStocks() {
 		ItemNode currentNode = head;
 
 		while (currentNode != null) {

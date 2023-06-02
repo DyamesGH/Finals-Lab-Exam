@@ -141,18 +141,19 @@ public class Main {
 	public static void transactOrder() throws NumberFormatException, IOException {
 		if (!itemList.haveItem()) {
 			return;
-		} else if (!itemList.haveStocks()) {
+		} else if (!itemList.checkItemsStocks()) {
 			return;
 		}
 
-		try {
-			boolean cont = true;
-			Transaction newTransaction = new Transaction();
-			orderList = new OrderList();
-			double orderSubTotal = 0.00;
-			double transactionTotal = 0.00;
 
-			while (cont) {
+		boolean cont = true;
+		Transaction newTransaction = new Transaction();
+		orderList = new OrderList();
+		double orderSubTotal = 0.00;
+		double transactionTotal = 0.00;
+
+		while (cont) {
+			try {
 				System.out.println();
 				itemList.displayItems();
 				System.out.println("\nTransaction ID: " + transactionList.getTransactionID());
@@ -193,20 +194,21 @@ public class Main {
 					cont = false;
 				}
 
-				if (!itemList.haveStocks()) {
+				if (!itemList.checkItemsStocks()) {
 					break;
 				}
+				
+				System.out.printf("%nTotal Price: P %,.2f %n", transactionTotal);
+				System.out.println("Transaction recorded!");
+				
+				newTransaction.setOrderList(orderList);
+				newTransaction.setTotalPrice(transactionTotal);
+				
+				transactionList.addTransaction(newTransaction);
+
+			} catch (Exception e) {
+				System.out.println("Invalid input.");
 			}
-
-			System.out.printf("%nTotal Price: P %,.2f %n", transactionTotal);
-			System.out.println("Transaction recorded!");
-
-			newTransaction.setOrderList(orderList);
-			newTransaction.setTotalPrice(transactionTotal);
-
-			transactionList.addTransaction(newTransaction);
-		} catch (Exception e) {
-			System.out.println("Invalid input.");
 		}
 	}
 
@@ -228,14 +230,14 @@ public class Main {
 			double totalSales = 0;
 
 			while (transaction != null) {
-				System.out.println("Transaction ID: " + transaction.getTransactionID());
+				System.out.println("\nTransaction ID: " + transaction.getTransactionID());
 				transaction.getOrderList().displayOrders(itemList);
-				System.out.printf("%nTotal: P %,.2f %n", transaction.getTotalPrice());
+				System.out.printf("%nTotal: P %,.2f ", transaction.getTotalPrice());
 				totalSales += transaction.getTotalPrice();
 				transaction = transaction.getNext();
 			}
 
-			System.out.printf("Total Sales: P %,.2f", totalSales);
+			System.out.printf("%nTotal Sales: P %,.2f", totalSales);
 		}
 
 	}
