@@ -40,6 +40,7 @@ public class OrderList {
 			size++;
 
 		} else {
+			newOrder.setPrevious(tail);
 			tail.setNext(newOrder);
 			tail = tail.getNext();
 			size++;
