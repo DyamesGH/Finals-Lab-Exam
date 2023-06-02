@@ -107,8 +107,6 @@ public class ItemList {
 			}
 			currentNode = currentNode.getNext();
 		}
-
-		System.out.println("\n--There are no more items with stocks. Please replenish the inventory.--");
 		return false;
 	}
 

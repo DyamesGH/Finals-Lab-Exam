@@ -30,6 +30,7 @@ public class Main {
 
 				switch (command) {
 				case 1:
+					System.out.println("----------Inventory Display----------");
 					itemList.displayItems();
 					break;
 				case 2:
@@ -101,6 +102,7 @@ public class Main {
 		}
 
 		try {
+			System.out.println("----------Replenishing Stock----------");
 			itemList.displayItems();
 			if (itemList.getHead() == null) {
 				System.out.println("There are no items in the inventory.");
@@ -154,7 +156,7 @@ public class Main {
 
 		while (cont) {
 			try {
-				System.out.println();
+				System.out.println("\n----------Order Transaction----------");
 				itemList.displayItems();
 				System.out.println("\nTransaction ID: " + transactionList.getTransactionID());
 				System.out.print("\nEnter Item ID: ");
@@ -186,7 +188,7 @@ public class Main {
 				orderList.addOrder(id, quantity, orderSubTotal);
 
 				orderSubTotal = 0;
-				if (orderList.getSize() != itemList.getSize()) {
+				if (itemList.ifItemsHaveStocks() == true) {
 					char choice;
 					while(true) {
 						System.out.print("Do you wish to add another item y/n? ");
@@ -209,12 +211,13 @@ public class Main {
 				}
 				System.out.printf("%nTotal Price: P %,.2f %n", transactionTotal);
 				System.out.println("Transaction recorded!");
-				
+
 				newTransaction.setOrderList(orderList);
 				newTransaction.setTotalPrice(transactionTotal);
-				
+
 				transactionList.addTransaction(newTransaction);
 				if (itemList.ifItemsHaveStocks() == false) {
+					System.out.println("\n--There are no more items with stocks. Please replenish the inventory.--");
 					break;
 				}
 
@@ -241,10 +244,11 @@ public class Main {
 			Transaction transaction = transactionList.getHead();
 			double totalSales = 0;
 
+			System.out.println("\n----------Transactions Report----------");
 			while (transaction != null) {
 				System.out.println("\nTransaction ID: " + transaction.getTransactionID());
 				transaction.getOrderList().displayOrders(itemList);
-				System.out.printf("%nTotal: P %,.2f ", transaction.getTotalPrice());
+				System.out.printf("Total: P %,.2f %n", transaction.getTotalPrice());
 				totalSales += transaction.getTotalPrice();
 				transaction = transaction.getNext();
 			}
