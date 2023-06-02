@@ -240,7 +240,7 @@ public class Main {
 				transaction = transaction.getNext();
 			}
 
-			System.out.printf("%nTotal Sales: P %,.2f", totalSales);
+			System.out.printf("%nTotal Sales: P %,.2f%n", totalSales);
 		}
 
 	}
