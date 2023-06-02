@@ -18,14 +18,16 @@ public class ItemList {
 	public static int getItemIdCounter() {
 		return itemIdCounter;
 	}
+
 	public ItemNode getHead() {
 		return head;
 	}
+
 	public int getSize() {
 		return size;
 	}
 
-	//Adds an ItemNode in the list
+	// Adds an ItemNode in the list
 	public void add(ItemNode node) {
 		if (head == null) {
 
@@ -47,6 +49,10 @@ public class ItemList {
 	 * Displays the items in the list in a specific format
 	 */
 	public void displayItems() {
+		if (!haveItem()) {
+			return;
+		}
+
 		System.out.printf("%-25s %-25s %-25s %-25s %n", "Item ID", "Description", "Price", "Stock");
 		ItemNode currentNode = head;
 		while (currentNode != null) {
@@ -58,8 +64,8 @@ public class ItemList {
 	}
 
 	/*
-	 * Used to search for an item in the list.
-	 * Returns the item if it is found, returns null if it not found.
+	 * Used to search for an item in the list. Returns the item if it is found,
+	 * returns null if it not found.
 	 */
 	public Item getItem(int id) {
 		ItemNode currentNode = head;
@@ -71,6 +77,39 @@ public class ItemList {
 			currentNode = currentNode.getNext();
 		}
 		return null;
+	}
+
+	/*
+	 * This method is used to check if the list have items by checking if the lists'
+	 * head is null. If it is null then it returns false else it returns true.
+	 */
+	public boolean haveItem() {
+		if (this.head == null) {
+			System.out.println("There are no available item. Please add an item first.");
+			return false;
+		}
+
+		return true;
+	}
+
+	/*
+	 * This method is used to check if the items in the list still have stocks by
+	 * checking each of the items in the list still have stocks. If it finds an item
+	 * still have stock it automatically returns true then if the whole list is
+	 * traversed but all the items have no stocks then it returns.
+	 */
+	public boolean haveStocks() {
+		ItemNode currentNode = head;
+
+		while (currentNode != null) {
+			if (currentNode.getData().getStock() > 0) {
+				return true;
+			}
+			currentNode = currentNode.getNext();
+		}
+
+		System.out.println("\n--There are no more items with stocks. Please replenish the inventory.--");
+		return false;
 	}
 
 }
