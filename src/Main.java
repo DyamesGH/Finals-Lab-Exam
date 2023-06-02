@@ -144,6 +144,7 @@ public class Main {
 		if (!itemList.haveItem()) {
 			return;
 		} else if (!itemList.ifItemsHaveStocks()) {
+			System.out.println("\n--There are no more items with stocks. Please replenish the inventory.--");
 			return;
 		}
 
