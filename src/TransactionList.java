@@ -34,6 +34,7 @@ public class TransactionList {
 			head = newTransaction;
 			tail = head;
 		} else {
+			newTransaction.setPrevious(tail);
 			tail.setNext(newTransaction);
 			tail = tail.getNext();
 		}
