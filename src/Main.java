@@ -187,12 +187,21 @@ public class Main {
 
 				orderSubTotal = 0;
 				if (orderList.getSize() != itemList.getSize()) {
-					System.out.print("Do you wish to add another item y/n? ");
-					char choice = reader.readLine().charAt(0);
-					if(choice == 'n') {
-						cont = false;
-					}else {
-						cont = true;
+					char choice;
+					while(true) {
+						System.out.print("Do you wish to add another item y/n? ");
+						choice = reader.readLine().charAt(0);
+						if(choice == 'n') {
+							cont = false;
+							break;
+						}else if (choice == 'y') {
+							cont = true;
+							break;
+						}else {
+							System.out.println("Invalid input.\n");
+						}
+					}
+					if(choice == 'y') {
 						continue;
 					}
 				} else {
