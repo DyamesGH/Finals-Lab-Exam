@@ -45,6 +45,13 @@ public class Main {
 					generateReport();
 					break;
 				case 6:
+					System.out.print("\n--Exit--" + "\nProgram will be terminated");
+					for (int i = 0; i < 3; i++) {
+						Thread.sleep(1000);
+						System.out.print(".");
+					}
+					System.out.print("\nProgram terminated.");
+					System.exit(0);
 					break;
 				default:
 					System.out.println("Invalid input.");
