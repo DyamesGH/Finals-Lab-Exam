@@ -6,11 +6,13 @@ public class ItemList {
 	private ItemNode head;
 	private ItemNode tail;
 	private static int itemIdCounter;
+	private int size;
 
 	public ItemList() {
 		head = null;
 		tail = null;
 		itemIdCounter = 1;
+		size = 0;
 	}
 
 	public static int getItemIdCounter() {
@@ -18,6 +20,9 @@ public class ItemList {
 	}
 	public ItemNode getHead() {
 		return head;
+	}
+	public int getSize() {
+		return size;
 	}
 
 	//Adds an ItemNode in the list
@@ -27,13 +32,14 @@ public class ItemList {
 			head = node;
 			tail = node;
 			itemIdCounter++;
-
+			size++;
 		} else {
 
 			tail.setNext(node);
 			node.setPrevious(tail);
 			tail = node;
 			itemIdCounter++;
+			size++;
 		}
 	}
 

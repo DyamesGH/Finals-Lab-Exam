@@ -4,6 +4,7 @@
 public class OrderList {
 	private OrderNode head;
 	private OrderNode tail;
+	private int size = 0;
 
 	public OrderNode getHead() {
 		return head;
@@ -20,6 +21,10 @@ public class OrderList {
 	public void setTail(OrderNode tail) {
 		this.tail = tail;
 	}
+	
+	public int getSize() {
+		return size;
+	}
 
 	/*
 	 * Adds an order in the order in the order list.
@@ -30,10 +35,12 @@ public class OrderList {
 		if (head == null) {
 			this.head = newOrder;
 			tail = head;
+			size++;
 
 		} else {
 			tail.setNext(newOrder);
 			tail = tail.getNext();
+			size++;
 		}
 	}
 

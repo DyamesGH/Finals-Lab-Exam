@@ -124,6 +124,8 @@ public class Main {
 	 * they will be asked if they want to do another transaction.
 	 * 
 	 * When the user refused to do any more transactions, the total of the transaction will be displayed.
+	 * When the user has already ordered all of the items in the inventory, they won't be able to order anymore
+	 * and their orders will be totaled.
 	 */
 	public static void transactOrder() throws NumberFormatException, IOException {
 		try {
@@ -166,10 +168,13 @@ public class Main {
 				orderList.addOrder(id, quantity, orderSubTotal);
 				
 				orderSubTotal = 0;
-				
-				System.out.print("Do you wish to add another item y/n? ");
-				char choice = reader.readLine().charAt(0);
-				cont = choice == 'n' ? false : true;
+				if(orderList.getSize() != itemList.getSize()) {
+					System.out.print("Do you wish to add another item y/n? ");
+					char choice = reader.readLine().charAt(0);
+					cont = choice == 'n' ? false : true;
+				}else {
+					cont = false;
+				}
 			}
 			
 			System.out.printf("%nTotal Price: P %,.2f %n" , transactionTotal);
